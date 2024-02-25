@@ -1,0 +1,46 @@
+
+<button mat-button style="box-shadow: 2px 5px 5px black;   margin-top: 2px;  width: 100%;" (click) = "AddPin()">Добавить</button>
+
+<table mat-table [dataSource]="sensors" class="mat-elevation-z8 demo-table" style="margin-top: 10px;">
+    <!-- Position Column -->
+    
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Pin" >
+      <th mat-header-cell *matHeaderCellDef> Номер пина </th>
+      <td mat-cell *matCellDef="let element"> 
+        
+        <mat-form-field class="example-full-width">
+            
+            <input matInput value="{{element.pinNumber}}">
+          </mat-form-field>
+      </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Type">
+      <th mat-header-cell *matHeaderCellDef> Тип </th>
+      <td mat-cell *matCellDef="let element"> 
+        <mat-form-field >
+            
+            <mat-select  [value] = "element.type" >
+              <mat-option value="Analog">Аналоговый</mat-option>
+              <mat-option value="Input">Цифровой</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <!-- <mat-form-field>
+             
+            <mat-select [value] = "element.type">
+              <mat-option value="one">First option</mat-option>
+              <mat-option value="two">Second option</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+      </td>
+    </ng-container>
+  
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row;  columns: displayedColumns;"></tr>
+  </table>

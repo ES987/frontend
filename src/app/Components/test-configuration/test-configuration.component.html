@@ -1,0 +1,29 @@
+
+<button mat-button style="box-shadow: 2px 5px 5px black;   margin-top: 2px;  width: 100%;" (click) = "AddChannel()">Добавить</button>
+<table mat-table [dataSource]="existingParameters" class="mat-elevation-z8 demo-table" style="margin-top: 10px;">
+    <!-- Position Column -->
+    
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef='channel' >
+      <th mat-header-cell *matHeaderCellDef> Канал </th>
+      <td mat-cell *matCellDef="let element"> 
+        {{element.channel}}
+      </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="parBinding" >
+      <th mat-header-cell *matHeaderCellDef> Параметр </th>
+      <td mat-cell *matCellDef="let element"   > 
+         {{element.name}}
+
+        
+      </td>
+    </ng-container>
+  
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row;  columns: displayedColumns;" style="cursor: pointer;" (click)="onSelectedParameter.emit(row)"  ></tr>
+  </table>

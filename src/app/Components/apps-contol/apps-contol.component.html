@@ -1,0 +1,85 @@
+
+
+
+
+<div class="wrapper">
+        <div >
+                <div class="container">
+                        <h1>Зарегистрированные программы</h1>
+                        <mat-list   *ngFor = "let app of apps">
+             
+                                <mat-list-item   (click) = "GetProviders(app.id)"  style="cursor: pointer; ">
+                                       {{app.id}}
+                                        
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                        </mat-list>
+                </div>
+                
+        </div>
+        <div >
+                <div class="container">
+                        
+                                <h1>
+                                        Провайдеры
+                                        <button mat-button style="box-shadow: 2px 5px 5px black; float: right; margin-top: 2px;" >Добавить</button>
+                                </h1>
+                                
+                         
+                        
+
+                        <mat-list  *ngFor = "let provider of providers">
+     
+                                <mat-list-item  (click) = "SelectProvider(provider)"     style="cursor: pointer; "  >
+                                     id: {{provider.id}}<br/>
+                                      тип провайдера: {{provider.type}}
+                                        <mat-slide-toggle style="float: right;" [(ngModel)]="provider.enable" (click) = "EnableProvider(provider.enable,provider.id)"></mat-slide-toggle>
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                              
+                                
+                          
+                        </mat-list>
+                </div>
+                
+        </div>
+        <div>
+                <div class="container" style="height: 100%;">
+                                <h1>Конфигурация провайдера</h1>
+
+                                <mat-form-field class="example-full-width" style="margin-left: 30px;">
+                                        <mat-label>Описание</mat-label>
+                                        <input matInput #message maxlength="256" >
+                                </mat-form-field>
+                                
+                                <mat-form-field class="example-full-width" style="margin-left: 30px;">
+                                  <mat-label>Источник данных</mat-label>
+                                  <input matInput #message maxlength="256" >
+                                </mat-form-field>
+
+                  <div style="margin-left: 30px; margin-right: 30px; margin-bottom: 10px;">
+                        <!-- <app-arduino-configuration    *ngSwitchCase="'Arduino'" [provider] = "SelectedProvider" ></app-arduino-configuration>                -->
+                        <ng-container #outlet [ngTemplateOutlet]="content">
+                        </ng-container>
+                  </div>              
+                 
+                </div>
+        </div>
+
+        <div>
+                <div class="container" style="height: 100%;">
+                        <h1>Непроставленные параметры</h1>
+                        <mat-selection-list #shoes [multiple]="false" *ngFor = "let Item of parameters">
+                                <mat-radio-button class="example-radio-button" [value]="Item.name" (click) = "AddBinding(Item)">{{Item.name}}</mat-radio-button>
+                                 
+                              
+                        </mat-selection-list>
+                </div>
+        </div>
+
+      </div>
+
+      <ng-template #content  [ngSwitch]="SelectedProvider.type">
+        <app-arduino-configuration    *ngSwitchCase="'Arduino'" [provider] = "SelectedProvider" ></app-arduino-configuration> 
+        <app-test-configuration    *ngSwitchCase="'Test'" [existingParameters] = "bindingParameters" (onSelectedParameter) = "selectParameter($event)" [provider] = "SelectedProvider"  ></app-test-configuration> 
+      </ng-template>

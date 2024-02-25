@@ -1,0 +1,17 @@
+
+.app-item{
+    cursor: pointer;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 15% 20% 20% 20%;
+    
+  }
+
+.container{
+    border: 1px dotted;
+    border-color: black;
+    box-shadow: 2px 5px 5px black;
+    margin-left: 30px;
+}
