@@ -22,7 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ArduinoConfigurationComponent } from './Components/arduino-configuration/arduino-configuration.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
- 
+import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { TestConfigurationComponent } from './Components/test-configuration/test-configuration.component';
 import {MatRadioModule} from '@angular/material/radio';
@@ -55,7 +55,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatRadioModule
+    MatRadioModule,
+    ScrollingModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -4,6 +4,7 @@ import { HttpClientHelper } from "../Helpers/HttpClientHelper";
 import { Provider } from "../Entities/Provider";
 import { Parameter } from "../Entities/Parameter";
 import { BindingParameter } from "../Entities/BindingParameter";
+import { ProviderLog } from "../Entities/ProviderLog";
 
 
 @Injectable()
@@ -41,6 +42,27 @@ export class ConfigurationService{
     public async GetParameters() :Promise<Parameter[]>{
       let request = "/api/conf/Parameters";
       return this._client.GetRequest(request); 
+    }
+
+    public async GetProviderLogs(providerId:string,start:number = 0) : Promise<ProviderLog[]>{
+      let request:string = `/api/conf/Logs/ProviderLogs?providerId=${providerId}&start=${start}`;
+      
+      console.log("Запрос логов для провайдера " + providerId);
+      let logs: ProviderLog[] = await  this._client.GetRequest(request);
+      logs.forEach(log => {
+        switch(log.logLevel){
+          case "error":
+            log.color = "#f5001d";
+            break;
+            case "warn":
+            log.color = "#f5c800";
+            break;
+            case "info":
+            log.color = "#5e5d5a";
+            break;
+        }
+      })
+      return logs;
     }
 
     public async GetBidingParameters(poviderId:string):Promise<BindingParameter[]>{

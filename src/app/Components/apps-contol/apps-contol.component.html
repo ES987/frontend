@@ -44,7 +44,7 @@
                 
         </div>
         <div>
-                <div class="container" style="height: 100%;">
+                <div class="container" style="height: 100%;" >
                                 <h1>Конфигурация провайдера</h1>
 
                                 <mat-form-field class="example-full-width" style="margin-left: 30px;">
@@ -66,7 +66,7 @@
                 </div>
         </div>
 
-        <div>
+        <!-- <div>
                 <div class="container" style="height: 100%;">
                         <h1>Непроставленные параметры</h1>
                         <mat-selection-list #shoes [multiple]="false" *ngFor = "let Item of parameters">
@@ -75,8 +75,26 @@
                               
                         </mat-selection-list>
                 </div>
-        </div>
+        </div> -->
+        <div  >
+                <mat-list-item role="listitem"  >
+                        <h1>Логи провайдеа {{SelectedProvider.id}}</h1>
+                </mat-list-item>
+         <div style="overflow-y: scroll; max-height:1000px; overflow-y: auto;"  #logsList (scroll) ="scroll($event)">
+                <mat-list role="list" style="margin-left: 30px;">
+                
 
+
+                        <mat-list-item role="listitem"  *ngFor = "let log of logs" [style.background-color]="log.color" >>
+                                {{log.dateTime}} |  {{log.message}}
+                        </mat-list-item>
+                        
+                </mat-list>
+         </div>       
+       
+                
+                
+                </div>
       </div>
 
       <ng-template #content  [ngSwitch]="SelectedProvider.type">
